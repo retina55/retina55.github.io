@@ -6,8 +6,6 @@ $(function() {
 
 
 
-
-
 	var x, i, j, selElmnt, a, b, c;
 	/*look for any elements with the class "custom-select":*/
 	x = document.getElementsByClassName("custom-select");
@@ -69,6 +67,22 @@ $(function() {
 	      arrNo.push(i)
 	    } else {
 	      y[i].classList.remove("select-arrow-active");
+	  	
+
+
+	  		// есть выбор - переход на страницу
+	  		if($(y[i]).text() == 'Вкладчик') {
+	  			// history.pushState(null, null, "");
+	  			
+	  			setTimeout(function() {
+	  			  document.location.href = "investor.html";
+	  			}, 500);
+	  		}
+	  		if($(y[i]).text() == 'Заёмщик') {
+	  			setTimeout(function() {
+	  			  document.location.href = "borrower.html";
+	  			}, 500);
+	  		}
 	    }
 	  }
 	  for (i = 0; i < x.length; i++) {
@@ -80,6 +94,20 @@ $(function() {
 	/*if the user clicks anywhere outside the select box,
 	then close all select boxes:*/
 	document.addEventListener("click", closeAllSelect);
+
+	
+
+
+
+
+
+
+	// $('.custom-select select').on('change', function(e) {
+	// 	alert();
+	// 	$(this).hide();
+	// });
+
+
 
 
 
@@ -247,7 +275,18 @@ $(function() {
 
 
 
-
+	$('.js-lk1').on('click', function(e) {
+		e.preventDefault();
+		setTimeout(function() {
+		  document.location.href = "investor.html";
+		}, 500);
+	});
+	$('.js-lk2').on('click', function(e) {
+		e.preventDefault();
+		setTimeout(function() {
+		  document.location.href = "borrower.html";
+		}, 500);
+	})
 
 
 
