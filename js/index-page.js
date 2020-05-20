@@ -275,20 +275,6 @@ $(function() {
 
 
 
-	$('.js-lk1').on('click', function(e) {
-		e.preventDefault();
-		setTimeout(function() {
-		  document.location.href = "investor.html";
-		}, 500);
-	});
-	$('.js-lk2').on('click', function(e) {
-		e.preventDefault();
-		setTimeout(function() {
-		  document.location.href = "borrower.html";
-		}, 500);
-	})
-
-
 
 
 
@@ -480,6 +466,122 @@ $(function() {
 
 		$('.pagepartners-promo7__right-q').hide('slow');
 		$('.pagepartners-promo7__right-q'+currentQ).show('slow');
+	});
+
+
+
+
+	// Калькулятор инвестора js-calc1
+	// переключение кнопок срок вклада 182 365
+	function calc1() {
+		var currentSum = 100;
+		currentSum = $('.js-calc1 .pageinvestor-promo1__left-range1 input').val();
+
+		var currentDays = 1;
+		currentDays = $('.js-calc1 .pageinvestor-promo1__left-range2 input').val();
+
+		var currentTarrif = 1;
+		if($('.js-calc1 .pageinvestor-promo1__left-buttons button:nth-child(1)').hasClass('active')) {
+			currentTarrif = 1;
+		}
+		else {
+			currentTarrif = 2;
+		}
+
+		// логика
+		var currentProcent = 1.1;
+		if(currentTarrif == 1) {
+			currentProcent = 1.1;
+			// Процент прибыли
+			$('.pageinvestor-promo1__right .prib span').text('1.1');
+		}
+		else {
+			currentProcent = 0.66;
+			// Процент прибыли
+			$('.pageinvestor-promo1__right .prib span').text('0.66');
+		}
+		var result = (currentSum*currentDays*currentProcent).toFixed(2);
+		// Доход
+		$('.pageinvestor-promo1__right .dohod span').text(result);
+
+
+
+
+		// console.log(currentSum);
+		// console.log(currentDays);
+		// console.log(currentTarrif);
+	}
+
+	$('.js-calc1 .pageinvestor-promo1__left-buttons button').on('click', function(e) {
+		$('.js-calc1 .pageinvestor-promo1__left-buttons button').removeClass('active');
+
+		$(this).addClass('active');
+
+		// изменение мин суммы и других параметров при смена срока вклада 182 365
+		if($(this).attr('data-tarrif') == 182) {
+			$('.js-calc1 input.sum').attr('min', 100);
+			$('.pageinvestor-promo1__left-range1-text h2').text('100');
+			$('.pageinvestor-promo1__left-range1 input').attr('value', 100);
+
+			$('.pageinvestor-promo1__left-range2 input').attr('max', '182');
+
+			$('.pageinvestor-promo1__left-text p:nth-child(1) span').text('100 %');
+			$('.pageinvestor-promo1__left-text p:nth-child(2) span').text('1.1 %');
+		}
+		else if($(this).attr('data-tarrif') == 365) {
+			$('.js-calc1 input.sum').attr('min', 500);
+			$('.pageinvestor-promo1__left-range1-text h2').text('500');
+			$('.pageinvestor-promo1__left-range1 input').attr('value', 500);
+			
+			$('.pageinvestor-promo1__left-range2 input').attr('max', '365');
+			
+			$('.pageinvestor-promo1__left-text p:nth-child(1) span').text('240 %');
+			$('.pageinvestor-promo1__left-text p:nth-child(2) span').text('0.66 %');
+		}
+
+		// сброс inputs
+		$('.js-calc1 input.sum').val(100);
+		
+		$('.js-calc1 input.days').val(1);
+		$('.pageinvestor-promo1__left-range2-text h2').text('1');
+
+		calc1();
+	});
+
+	// изменение range sum
+	$('.js-calc1 input.sum').on('input', function(e) {
+		// console.log('sum '+$(this).val());
+		$('.pageinvestor-promo1__left-range1-text h2').text($(this).val());
+
+
+		calc1();
+	});
+	// изменение range days
+	$('.js-calc1 input.days').on('input', function(e) {
+		// console.log('days '+$(this).val());
+		$('.pageinvestor-promo1__left-range2-text h2').text($(this).val());
+
+
+
+
+		calc1();
+	})
+
+
+
+
+
+	$('.js-lk1').on('click', function(e) {
+		e.preventDefault();
+		setTimeout(function() {
+		  document.location.href = "investor.html";
+		}, 500);
+	});
+	$('.js-lk2').on('click', function(e) {
+		e.preventDefault();
+		setTimeout(function() {
+		  document.location.href = "borrower.html";
+		}, 500);
 	});
 
 
