@@ -504,6 +504,12 @@ $(function() {
 		// Доход
 		$('.pageinvestor-promo1__right .dohod span').text(result);
 
+		// Сумма на момент вывода = тек сумма+доход
+		var result2 = $('.js-calc1 .pageinvestor-promo1__left-range1-text h2').text();
+		var result2 = (Number(result2)+Number(result)).toFixed(2);
+		$('.pageinvestor-promo1__right .vivod span').text(result2);
+
+
 
 
 
@@ -520,30 +526,30 @@ $(function() {
 		// изменение мин суммы и других параметров при смена срока вклада 182 365
 		if($(this).attr('data-tarrif') == 182) {
 			$('.js-calc1 input.sum').attr('min', 100);
-			$('.pageinvestor-promo1__left-range1-text h2').text('100');
-			$('.pageinvestor-promo1__left-range1 input').attr('value', 100);
+			$('.js-calc1 .pageinvestor-promo1__left-range1-text h2').text('100');
+			$('.js-calc1 .pageinvestor-promo1__left-range1 input').attr('value', 100);
 
-			$('.pageinvestor-promo1__left-range2 input').attr('max', '182');
+			$('.js-calc1 .pageinvestor-promo1__left-range2 input').attr('max', '182');
 
-			$('.pageinvestor-promo1__left-text p:nth-child(1) span').text('100 %');
-			$('.pageinvestor-promo1__left-text p:nth-child(2) span').text('1.1 %');
+			$('.js-calc1 .pageinvestor-promo1__left-text p:nth-child(1) span').text('100 %');
+			$('.js-calc1 .pageinvestor-promo1__left-text p:nth-child(2) span').text('1.1 %');
 		}
 		else if($(this).attr('data-tarrif') == 365) {
 			$('.js-calc1 input.sum').attr('min', 500);
-			$('.pageinvestor-promo1__left-range1-text h2').text('500');
-			$('.pageinvestor-promo1__left-range1 input').attr('value', 500);
+			$('.js-calc1 .pageinvestor-promo1__left-range1-text h2').text('500');
+			$('.js-calc1 .pageinvestor-promo1__left-range1 input').attr('value', 500);
 			
-			$('.pageinvestor-promo1__left-range2 input').attr('max', '365');
+			$('.js-calc1 .pageinvestor-promo1__left-range2 input').attr('max', '365');
 			
-			$('.pageinvestor-promo1__left-text p:nth-child(1) span').text('240 %');
-			$('.pageinvestor-promo1__left-text p:nth-child(2) span').text('0.66 %');
+			$('.js-calc1 .pageinvestor-promo1__left-text p:nth-child(1) span').text('240 %');
+			$('.js-calc1 .pageinvestor-promo1__left-text p:nth-child(2) span').text('0.66 %');
 		}
 
 		// сброс inputs
 		$('.js-calc1 input.sum').val(100);
 		
 		$('.js-calc1 input.days').val(1);
-		$('.pageinvestor-promo1__left-range2-text h2').text('1');
+		$('.js-calc1 .pageinvestor-promo1__left-range2-text h2').text('1');
 
 		calc1();
 	});
