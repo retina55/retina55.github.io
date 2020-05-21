@@ -511,8 +511,6 @@ $(function() {
 
 
 
-
-
 		// console.log(currentSum);
 		// console.log(currentDays);
 		// console.log(currentTarrif);
@@ -559,7 +557,6 @@ $(function() {
 		// console.log('sum '+$(this).val());
 		$('.pageinvestor-promo1__left-range1-text h2').text($(this).val());
 
-
 		calc1();
 	});
 	// изменение range days
@@ -567,11 +564,266 @@ $(function() {
 		// console.log('days '+$(this).val());
 		$('.pageinvestor-promo1__left-range2-text h2').text($(this).val());
 
-
-
-
 		calc1();
-	})
+	});
+
+
+
+
+
+
+
+	// Калькулятор инвестора js-calc2
+	// переключение кнопок тип займа
+	function calc2() {
+		var currentSum = 1;
+		currentSum = $('.js-calc2 .pageborrower-promo1__left-range1 input').val();
+
+		var currentDays = 1;
+		currentDays = $('.js-calc2 .pageborrower-promo1__left-range2 input').val();
+
+		var currentTarrif = 1;
+		var currentProcent = 1.9;
+		if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(1)').hasClass('active')) {
+			currentTarrif = 1;
+			currentProcent = 1.9;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(2)').hasClass('active')) {
+			currentTarrif = 2;
+			currentProcent = 1.2;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(3)').hasClass('active')) {
+			currentTarrif = 3;
+			currentProcent = 0.36;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(4)').hasClass('active')) {
+			currentTarrif = 4;
+			currentProcent = 0.06;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(5)').hasClass('active')) {
+			currentTarrif = 5;
+			currentProcent = 0.28;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(6)').hasClass('active')) {
+			currentTarrif = 6;
+			currentProcent = 2.8;
+		}
+		else if($('.js-calc2 .pageborrower-promo1__left-buttons button:nth-child(7)').hasClass('active')) {
+			currentTarrif = 7;
+			currentProcent = 0.4;
+		}
+
+	
+		// изменение суммы займа в правой части
+		$('.pageborrower-promo1__right .vivod').text(currentSum+' $');
+
+		// изменение Конечная выплата+само тело в правой части
+		var result = 0;
+		result3 = (currentSum*currentDays*currentProcent/100);
+		result3 = (Number(result3) + Number(currentSum)).toFixed(2);
+		$('.pageborrower-promo1__right .dohod').text(result3+' $');
+
+		// изменение Начисление в день в правой части
+		$('.pageborrower-promo1__right .prib').text(currentProcent+' %');
+
+
+
+
+		
+
+		
+		
+
+		// // логика
+		// var currentProcent = 1.1;
+		// if(currentTarrif == 1) {
+		// 	currentProcent = 1.1;
+		// 	// Процент прибыли
+		// 	$('.pageinvestor-promo1__right .prib span').text('1.1');
+		// }
+		// else {
+		// 	currentProcent = 0.66;
+		// 	// Процент прибыли
+		// 	$('.pageinvestor-promo1__right .prib span').text('0.66');
+		// }
+		// var result = (currentSum*currentDays*currentProcent).toFixed(2);
+		// // Доход
+		// $('.pageinvestor-promo1__right .dohod span').text(result);
+
+		// // Сумма на момент вывода = тек сумма+доход
+		// var result2 = $('.js-calc1 .pageinvestor-promo1__left-range1-text h2').text();
+		// var result2 = (Number(result2)+Number(result)).toFixed(2);
+		// $('.pageinvestor-promo1__right .vivod span').text(result2);
+
+
+
+		// console.log(currentSum);
+		// console.log(currentDays);
+		// console.log(currentTarrif);
+
+
+
+		// del
+		// $('.js-calc2 input.sum').attr('min', 100);
+		// $('.js-calc2 .pageinvestor-promo1__left-range1-text h2').text('100');
+		// $('.js-calc2 .pageinvestor-promo1__left-range1 input').attr('value', 100);
+
+		// $('.js-calc2 .pageinvestor-promo1__left-range2 input').attr('max', '182');
+
+		// $('.js-calc2 .pageinvestor-promo1__left-text p:nth-child(1) span').text('100 %');
+		// $('.js-calc2 .pageinvestor-promo1__left-text p:nth-child(2) span').text('1.1 %');
+	}
+
+	$('.js-calc2 .pageborrower-promo1__left-buttons button').on('click', function(e) {
+		$('.js-calc2 .pageborrower-promo1__left-buttons button').removeClass('active');
+		$(this).addClass('active');
+
+
+
+		// изменение мин суммы и других параметров при смена тип займа
+		if($(this).attr('data-tarrif') == 1) {
+			// Займ на любые цели
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('1.9 % в день');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 3000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 150);
+			$('.js-calc2 input.days2').attr('value', 1);
+		}
+		else if($(this).attr('data-tarrif') == 2) {
+			// Займ для пенсионеров
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('1.2 % в день');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 1000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 30);
+			$('.js-calc2 input.days2').attr('value', 1);
+		}
+		else if($(this).attr('data-tarrif') == 3) {
+			// Рефинансирование кредита
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('10.9 % в месяц');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 2000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 240);
+			$('.js-calc2 input.days2').attr('value', 1);
+		}
+		else if($(this).attr('data-tarrif') == 4) {
+			// Автокредит
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('1.9 % в месяц');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 10000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 1825);
+			$('.js-calc2 input.days2').attr('value', 1);			
+		}
+		else if($(this).attr('data-tarrif') == 5) {
+			// Займ на образование
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('8.6 % в месяц');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 3000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 1095);
+			$('.js-calc2 input.days2').attr('value', 1);			
+		}
+		else if($(this).attr('data-tarrif') == 6) {
+			// Займ «до зарплаты»
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('2.8 % в день');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 300);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 45);
+			$('.js-calc2 input.days2').attr('value', 1);			
+		}
+		else if($(this).attr('data-tarrif') == 7) {
+			// Займ на бытовую технику
+
+			// Ставка займа текст
+			$('.js-calc2 .pageborrower-promo1__left-text p span').text('12 % в месяц');
+
+			// Сумма займа min max value
+			$('.js-calc2 input.sum2').attr('min', 1);
+			$('.js-calc2 input.sum2').attr('max', 2000);
+			$('.js-calc2 input.sum2').attr('value', 1);
+
+			// Срок займа min max value
+			$('.js-calc2 input.days2').attr('min', 1);
+			$('.js-calc2 input.days2').attr('max', 90);
+			$('.js-calc2 input.days2').attr('value', 1);			
+		}
+
+		// сброс inputs
+		$('.js-calc2 input.sum2').val(1);
+		$('.js-calc2 input.days2').val(1);
+		$('.js-calc2 .pageinvestor-promo1__left-range1-text h2').text('1');
+		$('.js-calc2 .pageinvestor-promo1__left-range2-text h2').text('1');
+
+		calc2();
+	});
+
+	// изменение range sum2
+	$('.js-calc2 input.sum2').on('input', function(e) {
+		// console.log('sum2 '+$(this).val());
+		$('.pageinvestor-promo1__left-range1-text h2').text($(this).val());
+
+		calc2();
+	});
+	// изменение range days2
+	$('.js-calc2 input.days2').on('input', function(e) {
+		// console.log('days2 '+$(this).val());
+		$('.pageinvestor-promo1__left-range2-text h2').text($(this).val());
+
+		calc2();
+	});
+
+
+
+
+
+
+
 
 
 
